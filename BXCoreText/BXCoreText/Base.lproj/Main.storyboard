@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9WP-aq-j5Y" customClass="BXCoreTextView">
+                                <rect key="frame" x="16" y="147" width="343" height="520"/>
+                                <color key="backgroundColor" red="0.0" green="0.18431372549019609" blue="0.65490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrB-XJ-dma">
+                                <rect key="frame" x="27" y="40" width="320" height="87"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="xnG-sd-92Z"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="clN-8v-lMf"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9WP-aq-j5Y" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="127" id="SWY-ug-cyk"/>
+                            <constraint firstItem="9WP-aq-j5Y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="TEN-bd-2b2"/>
+                            <constraint firstItem="rrB-XJ-dma" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UzZ-zc-OXo"/>
+                            <constraint firstItem="rrB-XJ-dma" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="qYC-Va-Vd8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9WP-aq-j5Y" secondAttribute="trailing" id="uJc-n7-bXy"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9WP-aq-j5Y" secondAttribute="bottom" id="z82-KB-eic"/>
+                            <constraint firstItem="9WP-aq-j5Y" firstAttribute="top" secondItem="rrB-XJ-dma" secondAttribute="bottom" constant="20" id="zNb-AR-2BP"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="coreTextView" destination="9WP-aq-j5Y" id="P38-Sl-pNw"/>
+                        <outlet property="pickView" destination="rrB-XJ-dma" id="Y53-Ir-SwW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="198.5" y="338.5"/>
+        </scene>
+    </scenes>
+</document>
