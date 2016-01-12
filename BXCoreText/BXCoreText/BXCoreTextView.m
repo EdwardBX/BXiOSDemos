@@ -58,9 +58,11 @@
         [self initAttrStringWithTextString:self.text];
         [self columnarTextLayoutWithContext:context
                            attributedString:attrString
-                                columnCount:7];
+                                columnCount:2];
+        CFRelease(attrString);
     } else if (self.drawType == DrawTextLabel) {
-        CFStringRef aString = (__bridge CFStringRef)self.text;
+        NSString *labelString = @"Hello, world!";
+        CFStringRef aString = (__bridge CFStringRef)labelString;
         CTFontDescriptorRef aFontDes =
         [self CreateFontDescriptorFromFamilyName:@"Papyrus"
                                       fontTraits:kCTFontTraitCondensed
@@ -70,8 +72,8 @@
         [self TypesettingTextLabelWithContext:context
                                        string:aString
                                          font:aFont];
+        CFRelease(aFont);
         CFRelease(aFontDes);
-        CFRelease(aString);
     } else if (self.drawType == DrawStyledParagraph){
         [self drawStyledParagraphWithRect:rect
                                   context:context];
@@ -282,7 +284,7 @@ NSAttributedString* applyParaStyle(CFStringRef fontName,
 -(void)drawStyledParagraphWithRect:(CGRect)rect
                            context:(CGContextRef)context{
     CFStringRef fontName = CFSTR("Didot-Italic");
-    CGFloat pointSize = 34.0;
+    CGFloat pointSize = 25.0;
     
     CFStringRef string = CFSTR("Hello, World! I know nothing in the world that has as much power as a word. Sometimes I write one, and I look at it, until it begins to shine.");
                                
@@ -417,7 +419,6 @@ CTFontDescriptorRef CreateFontDescriptorFromName(CFStringRef postScriptName,
 
     CTFontDescriptorRef descriptor =
     CTFontDescriptorCreateWithAttributes((CFDictionaryRef)attributes);
-//    CFRelease(descriptor);
     return descriptor;
 }
 
