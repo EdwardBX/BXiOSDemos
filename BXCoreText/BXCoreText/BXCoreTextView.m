@@ -90,7 +90,7 @@
     // 创建一个 path, 在它的 bounds 内绘制文本.
     CGMutablePathRef path = CGPathCreateMutable();
     // 初始化一个矩形的 path.
-    CGRect bounds = CGRectMake(10.0, 0.0,
+    CGRect bounds = CGRectMake(10.0, 0,
                                self.bounds.size.width,
                                self.bounds.size.height);
     CGPathAddRect(path, NULL, bounds);
@@ -140,13 +140,20 @@
     CFAttributedStringRef attrString =
     CFAttributedStringCreate(kCFAllocatorDefault,
                              string, attributes);
-    CFRelease(string);
     CFRelease(attributes);
     
     CTLineRef line = CTLineCreateWithAttributedString(attrString);
-    CGContextSetTextPosition(context, 50.0, 50.0);
+    
+    CGFloat lineAscent;
+    CGFloat lineDescent;
+    CGFloat lineLeading;
+    // 该函数除了会设置好ascent,descent,leading之外，还会返回这行的宽度
+    CTLineGetTypographicBounds(line, &lineAscent, &lineDescent, &lineLeading);
+    CGContextSetTextPosition(context, 0, self.bounds.size.height - lineAscent - lineDescent - lineLeading);
     CTLineDraw(line, context);
+    
     CFRelease(line);
+    CFRelease(attrString);
 }
 
 /**
@@ -301,13 +308,14 @@ NSAttributedString* applyParaStyle(CFStringRef fontName,
                                                 path, NULL);
     CTFrameDraw(frame, context);
     CFRelease(frame);
+    CFRelease(framesetter);
     CGPathRelease(path);
 }
 
 //换行
 - (CFIndex)manualLineBreakingWithContext:(CGContextRef)context
                                    index:(CFIndex)index{
-    // 初始化,这几个变量可设为参数
+    // 初始化，这几个变量可设为参数
     double width = 300.0;
     CGPoint textPosition = CGPointMake(10.0, 20.0);
     CFAttributedStringRef attrString =
