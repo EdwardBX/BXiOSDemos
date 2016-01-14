@@ -157,11 +157,11 @@
 }
 
 /**
- *  创建纵向排版
+ *  创建分栏排版
  *
- *  @param columnCount 纵向行数
+ *  @param columnCount 纵向分栏数
  *
- *  @return 一组纵行的绘制路径
+ *  @return 一组分栏绘制路径
  */
 - (CFArrayRef)createColumnsWithColumnCount:(int)columnCount
 {
@@ -169,7 +169,7 @@
     
     CGRect* columnRects = (CGRect*)calloc(columnCount,
                                           sizeof(*columnRects));
-    // 第一个纵行覆盖全部视图
+    // 第一列覆盖全部视图
     columnRects[0] = self.bounds;
     
     // 计算每一个纵行的宽度
@@ -184,7 +184,7 @@
         columnRects[column] = CGRectInset(columnRects[column], 10.0, 15.0);
     }
     
-    // 为每个纵行创建绘制路径
+    // 为每列创建绘制路径
     CFMutableArrayRef array = CFArrayCreateMutable(kCFAllocatorDefault,
                                                    columnCount, &kCFTypeArrayCallBacks);
     for (column = 0; column < columnCount; column++) {
@@ -198,11 +198,11 @@
 }
 
 /**
- *  纵向排版
+ *  分栏排版
  *
  *  @param context    上下文
  *  @param attrString 属性字符串
- *  @param count      纵向的列数
+ *  @param count      分栏列数
  */
 - (void)columnarTextLayoutWithContext:(CGContextRef)context
                      attributedString:(CFMutableAttributedStringRef)attrString

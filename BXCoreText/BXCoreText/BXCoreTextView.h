@@ -10,7 +10,7 @@
 
 typedef NS_ENUM(NSInteger, BXDrawType){
     DrawPureText,                // 绘制文本段落
-    DrawColumnarText,            // 绘制纵排文本
+    DrawColumnarText,            // 绘制分栏文本
     DrawTextLabel,               // 绘制文本按钮
     DrawStyledParagraph          // 绘制样式段落
 };
