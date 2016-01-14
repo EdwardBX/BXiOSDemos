@@ -59,7 +59,6 @@
         [self columnarTextLayoutWithContext:context
                            attributedString:attrString
                                 columnCount:2];
-        CFRelease(attrString);
     } else if (self.drawType == DrawTextLabel) {
         NSString *labelString = @"Hello, world!";
         CFStringRef aString = (__bridge CFStringRef)labelString;
@@ -77,6 +76,10 @@
     } else if (self.drawType == DrawStyledParagraph){
         [self drawStyledParagraphWithRect:rect
                                   context:context];
+    } else {
+        CFMutableAttributedStringRef attrString =
+        [self initAttrStringWithTextString:self.text];
+        [self drawDonutWithContext:context attributedString:attrString];
     }
 }
 
@@ -237,6 +240,7 @@
     
     CFRelease(columnPaths);
     CFRelease(framesetter);
+    CFRelease(attrString);
 }
 
 /**
@@ -311,6 +315,85 @@ NSAttributedString* applyParaStyle(CFStringRef fontName,
     CFRelease(framesetter);
     CGPathRelease(path);
 }
+
+// 创建非矩形绘制路径实例
+static void AddSquashedDonutPath(CGMutablePathRef path,
+                                 const CGAffineTransform *m, CGRect rect) {
+    CGFloat width = CGRectGetWidth(rect);
+    CGFloat height = CGRectGetHeight(rect);
+    
+    CGFloat radiusH = width / 3.0;
+    CGFloat radiusV = height / 3.0;
+    
+    CGPathMoveToPoint(path, m, rect.origin.x,
+                      rect.origin.y + height - radiusV);
+    CGPathAddQuadCurveToPoint(path, m, rect.origin.x,
+                              rect.origin.y + height,
+                              rect.origin.x + radiusH,
+                              rect.origin.y + height);
+    CGPathAddLineToPoint(path, m, rect.origin.x + width - radiusH,
+                         rect.origin.y + height);
+    CGPathAddQuadCurveToPoint(path, m, rect.origin.x + width,
+                              rect.origin.y + height,
+                              rect.origin.x + width,
+                              rect.origin.y + height - radiusV);
+    CGPathAddLineToPoint(path, m, rect.origin.x + width,
+                         rect.origin.y + radiusV);
+    CGPathAddQuadCurveToPoint(path, m, rect.origin.x + width,
+                              rect.origin.y,
+                              rect.origin.x + width - radiusH,
+                              rect.origin.y);
+    CGPathAddLineToPoint(path, m, rect.origin.x + radiusH, rect.origin.y);
+    CGPathAddQuadCurveToPoint(path, m, rect.origin.x, rect.origin.y,
+                              rect.origin.x, rect.origin.y + radiusV);
+    CGPathCloseSubpath(path);
+    CGPathAddEllipseInRect(path, m,
+                           CGRectMake(rect.origin.x + width / 2.0 - width / 5.0,
+                                      rect.origin.y + height / 2.0 - height / 5.0,
+                                      width / 5.0 * 2.0, height / 5.0 * 2.0));
+}
+
+- (NSArray *)paths {
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGRect bounds = self.bounds;
+    bounds = CGRectInset(bounds, 10.0, 10.0);
+    AddSquashedDonutPath(path, NULL, bounds);
+    
+    NSMutableArray *result =
+    [NSMutableArray arrayWithObject:CFBridgingRelease(path)];
+    return result;
+}
+
+-(void)drawDonutWithContext:(CGContextRef)context
+           attributedString:(CFMutableAttributedStringRef)attrString {
+    NSArray *paths = [self paths];
+    CFIndex startIndex = 0;
+    CTFramesetterRef framesetter =
+    CTFramesetterCreateWithAttributedString(attrString);
+    
+    for (id object in paths) {
+        CGPathRef path = (__bridge CGPathRef)object;
+        
+        // path 的背景设为黄色
+        CGContextSetFillColorWithColor(context, [[UIColor yellowColor] CGColor]);
+        
+        CGContextAddPath(context, path);
+        CGContextFillPath(context);
+        
+        CGContextDrawPath(context, kCGPathStroke);
+        
+        CTFrameRef frame = CTFramesetterCreateFrame(framesetter,
+                                                    CFRangeMake(startIndex, 0), path, NULL);
+        CTFrameDraw(frame, context);
+        CFRange frameRange = CTFrameGetVisibleStringRange(frame);
+        startIndex += frameRange.length;
+        CFRelease(frame);
+    }
+    
+    CFRelease(attrString);
+    CFRelease(framesetter);
+}
+
 
 //换行
 - (CFIndex)manualLineBreakingWithContext:(CGContextRef)context

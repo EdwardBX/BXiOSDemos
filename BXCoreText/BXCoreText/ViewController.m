@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.typeArray = [NSArray arrayWithObjects:@"DrawPureText", @"DrawColumnarText", @"DrawTextLabel", @"DrawStyledParagraph", nil];
+    self.typeArray = [NSArray arrayWithObjects:@"DrawPureText", @"DrawColumnarText", @"DrawTextLabel", @"DrawStyledParagraph", @"DrawDonutText",nil];
     self.coreTextView.drawType = DrawPureText;
 }
 
@@ -53,6 +53,9 @@
         [self.coreTextView setNeedsDisplay];
     } else if (row == 3){
         self.coreTextView.drawType = DrawStyledParagraph;
+        [self.coreTextView setNeedsDisplay];
+    } else {
+        self.coreTextView.drawType = DrawDonutText;
         [self.coreTextView setNeedsDisplay];
     }
 }
