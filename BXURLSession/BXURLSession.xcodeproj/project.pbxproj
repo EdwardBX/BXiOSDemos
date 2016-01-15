@@ -78,6 +78,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8293613A1C476C8300956582 /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = OAuth;
+			sourceTree = "<group>";
+		};
 		82A1CE7B1C46522B000F6B63 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +108,7 @@
 		82A1CE861C46522B000F6B63 /* BXURLSession */ = {
 			isa = PBXGroup;
 			children = (
+				8293613A1C476C8300956582 /* OAuth */,
 				82A1CE8A1C46522B000F6B63 /* AppDelegate.h */,
 				82A1CE8B1C46522B000F6B63 /* AppDelegate.m */,
 				82A1CE8D1C46522B000F6B63 /* ViewController.h */,
@@ -498,6 +506,7 @@
 				82A1CEB31C46522B000F6B63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		82A1CEB41C46522B000F6B63 /* Build configuration list for PBXNativeTarget "BXURLSessionTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +515,7 @@
 				82A1CEB61C46522B000F6B63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		82A1CEB71C46522B000F6B63 /* Build configuration list for PBXNativeTarget "BXURLSessionUITests" */ = {
 			isa = XCConfigurationList;
@@ -514,6 +524,7 @@
 				82A1CEB91C46522B000F6B63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
