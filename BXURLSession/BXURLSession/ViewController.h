@@ -11,9 +11,9 @@ typedef void (^CompletionHandlerType)();
 
 @interface ViewController : UIViewController <NSURLSessionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate, NSURLSessionDownloadDelegate>
 
-@property NSURLSession *backgroundSession;
+//@property NSURLSession *backgroundSession;
 @property NSURLSession *defaultSession;
-@property NSURLSession *ephemeralSession;
+//@property NSURLSession *ephemeralSession;
 @property NSMutableDictionary *completionHandlerDictionary;
 
 - (void)addCompletionHandler: (CompletionHandlerType)handler forSession: (NSString *)identifier;

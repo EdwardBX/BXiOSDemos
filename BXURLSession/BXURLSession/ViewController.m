@@ -11,6 +11,7 @@
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *backgroundDownBtn;
 @property (weak, nonatomic) IBOutlet UIButton *downloadBtn;
 @property (weak, nonatomic) IBOutlet UIButton *sysDelegateFetchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *cusDelegateFetchBtn;
@@ -68,10 +69,14 @@
 /**
  *  创建后台 session
  */
--(void)initBackgroundSession {
-    NSURLSessionConfiguration *backgroundConfigObject = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: @"myBackgroundSessionIdentifier"];
-    backgroundConfigObject.allowsCellularAccess = NO;
-    self.backgroundSession = [NSURLSession sessionWithConfiguration: backgroundConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
+-(NSURLSession *)createBackgroundSession {
+    static NSURLSession *backgroundSession = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.xbx.BackgroundDownload.BackgroundSession"];
+        backgroundSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
+    });
+    return backgroundSession;
 }
 
 #pragma mark - ----action
@@ -109,13 +114,24 @@
 }
 
 - (IBAction)downLoad:(UIButton *)sender {
-    [self initBackgroundSession];
+    [self initDefaultSession];
     self.progressView.hidden = NO;
+    [self.downloadBtn setUserInteractionEnabled:NO];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     NSURL *url = [NSURL URLWithString: @"http://imgchr.com/images/p2303442368.jpg"];
-    NSURLSessionDownloadTask *downloadTask = [self.backgroundSession downloadTaskWithURL: url];
+    NSURLSessionDownloadTask *downloadTask = [self.defaultSession downloadTaskWithURL: url];
     
+    [downloadTask resume];
+}
+- (IBAction)backgroundDown:(UIButton *)sender {
+    self.progressView.hidden = NO;
+    [self.downloadBtn setUserInteractionEnabled:NO];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    NSURL *url = [NSURL URLWithString: @"http://imgchr.com/images/p2303442368.jpg"];
+    NSURLSession *BGSession = [self createBackgroundSession];
+    NSURLSessionDownloadTask *downloadTask = [BGSession downloadTaskWithURL: url];
     [downloadTask resume];
 }
 
@@ -193,7 +209,6 @@ expectedTotalBytes:(int64_t)expectedTotalBytes {
 
 -(void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
     NSLog(@"Background URL session %@ finished events.\n", session);
-    
     if (session.configuration.identifier)
         [self callCompletionHandlerForSession: session.configuration.identifier];
 }

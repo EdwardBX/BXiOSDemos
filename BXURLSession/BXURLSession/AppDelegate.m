@@ -43,7 +43,14 @@
 }
 
 - (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler {
-
+    ViewController *vc = [[ViewController alloc]init];
+    NSURLSessionConfiguration *backgroundConfigObject = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: identifier];
+    
+    NSURLSession *backgroundSession = [NSURLSession sessionWithConfiguration: backgroundConfigObject delegate: vc delegateQueue: [NSOperationQueue mainQueue]];
+    
+    NSLog(@"Rejoining session %@\n", identifier);
+    
+    [vc addCompletionHandler: completionHandler forSession: identifier];
 }
 
 @end
