@@ -74,7 +74,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.xbx.BackgroundDownload.BackgroundSession"];
-        backgroundSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
+        backgroundSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
     });
     return backgroundSession;
 }
@@ -126,7 +126,7 @@
 }
 - (IBAction)backgroundDown:(UIButton *)sender {
     self.progressView.hidden = NO;
-    [self.downloadBtn setUserInteractionEnabled:NO];
+    [self.backgroundDownBtn setUserInteractionEnabled:NO];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     NSURL *url = [NSURL URLWithString: @"http://imgchr.com/images/p2303442368.jpg"];
