@@ -44,13 +44,19 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wab-pV-JKU">
                                 <rect key="frame" x="358" y="40" width="96" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Button"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="后台下载"/>
+                                <connections>
+                                    <action selector="backgroundDown:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AZg-8p-APF"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gif-uk-4Oo">
                                 <rect key="frame" x="464" y="40" width="96" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Button"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <state key="normal" title="取消下载"/>
+                                <connections>
+                                    <action selector="cancelDownload:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nCV-Xm-xtN"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drt-wz-2sq">
                                 <rect key="frame" x="50" y="87" width="500" height="15"/>
@@ -119,6 +125,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
+                        <outlet property="backgroundDownBtn" destination="Wab-pV-JKU" id="VsP-W1-1nG"/>
+                        <outlet property="cancelBtn" destination="Gif-uk-4Oo" id="uFP-Rg-IsF"/>
                         <outlet property="cusDelegateFetchBtn" destination="fZe-lT-eOQ" id="Kdw-hH-KGt"/>
                         <outlet property="downloadBtn" destination="mPS-vd-Ivn" id="NeO-xq-ONI"/>
                         <outlet property="downloadIV" destination="J2M-IE-0hS" id="plF-t7-FJS"/>

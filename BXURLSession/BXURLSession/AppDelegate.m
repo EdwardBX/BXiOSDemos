@@ -43,14 +43,19 @@
 }
 
 - (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler {
+#warning 不调用 待解决
     ViewController *vc = [[ViewController alloc]init];
     NSURLSessionConfiguration *backgroundConfigObject = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: identifier];
     
     NSURLSession *backgroundSession = [NSURLSession sessionWithConfiguration: backgroundConfigObject delegate: vc delegateQueue: [NSOperationQueue mainQueue]];
     
-    NSLog(@"Rejoining session %@\n", identifier);
-    
-    [vc addCompletionHandler: completionHandler forSession: identifier];
+    [backgroundSession getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks) {
+        if (![downloadTasks count]){
+            NSLog(@"Rejoining session %@\n", identifier);
+            
+            [vc addCompletionHandler: completionHandler forSession: identifier];
+        }
+    }];
 }
 
 @end

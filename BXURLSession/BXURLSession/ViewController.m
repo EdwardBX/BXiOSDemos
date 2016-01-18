@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *downloadBtn;
 @property (weak, nonatomic) IBOutlet UIButton *sysDelegateFetchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *cusDelegateFetchBtn;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 @property (weak, nonatomic) IBOutlet UILabel *logStatusLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *downloadIV;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
@@ -73,7 +74,7 @@
     static NSURLSession *backgroundSession = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.xbx.BackgroundDownload.BackgroundSession"];
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"xbx.BXURLSession.BGSession"];
         backgroundSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
     });
     return backgroundSession;
@@ -120,10 +121,21 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     NSURL *url = [NSURL URLWithString: @"http://imgchr.com/images/p2303442368.jpg"];
-    NSURLSessionDownloadTask *downloadTask = [self.defaultSession downloadTaskWithURL: url];
+    self.downloadTask = [self.defaultSession downloadTaskWithURL: url];
     
-    [downloadTask resume];
+    [self.downloadTask resume];
 }
+
+- (IBAction)cancelDownload:(UIButton *)sender {
+    if(self.downloadTask) {
+        [self.downloadTask cancel];
+        self.downloadTask = nil;
+        [self.progressView setProgress:0.01 animated:YES];
+        self.progressView.hidden = YES;
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }
+}
+
 - (IBAction)backgroundDown:(UIButton *)sender {
     self.progressView.hidden = NO;
     [self.backgroundDownBtn setUserInteractionEnabled:NO];
@@ -131,8 +143,8 @@
     
     NSURL *url = [NSURL URLWithString: @"http://imgchr.com/images/p2303442368.jpg"];
     NSURLSession *BGSession = [self createBackgroundSession];
-    NSURLSessionDownloadTask *downloadTask = [BGSession downloadTaskWithURL: url];
-    [downloadTask resume];
+    self.downloadTask = [BGSession downloadTaskWithURL: url];
+    [self.downloadTask resume];
 }
 
 #pragma mark - ----public API
@@ -157,33 +169,46 @@
 
 #pragma mark - ----NSURLSession Delegate
 - (void)URLSession:(NSURLSession *)session
-          dataTask:(NSURLSessionDataTask *)dataTask
-    didReceiveData:(NSData *)data{
-    NSLog(@"didReceiveData %@.\n", data);
-}
-
-- (void)URLSession:(NSURLSession *)session
               task:(NSURLSessionTask *)task
 didCompleteWithError:(NSError *)error {
     NSLog(@"didComplete with error %@.\n", error);
     self.logStatusLabel.text = @"Did Complete.";
 }
 
+- (void)URLSession:(NSURLSession *)session
+          dataTask:(NSURLSessionDataTask *)dataTask
+    didReceiveData:(NSData *)data{
+    NSLog(@"didReceiveData %@.\n", data);
+}
+
 -(void)URLSession:(NSURLSession *)session
      downloadTask:(NSURLSessionDownloadTask *)downloadTask
 didFinishDownloadingToURL:(NSURL *)location {
-    NSLog(@"Session %@ download task %@ finished downloading to URL %@\n",
-          session, downloadTask, location);
     self.progressView.hidden = YES;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
-    //从下载的临时文件中读取
-    NSError *err = nil;
-    NSFileHandle *fh = [NSFileHandle fileHandleForReadingFromURL:location
-                                                           error: &err];
-    NSData *data = [fh readDataToEndOfFile];
-    self.downloadIV.image = [UIImage imageWithData:data];
-    self.downloadIV.contentMode = UIViewContentModeScaleToFill;
+    //下载后保存文件
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSArray *URLs = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSURL *documentsDirectory = URLs[0];
+    NSURL *destinationPath = [documentsDirectory URLByAppendingPathComponent:[location lastPathComponent]];
+    NSError *error;
+    NSLog(@"%@",destinationPath);
+    // 删除之前存在的文件，并把临时文件移到目的文件夹
+    [fileManager removeItemAtURL:destinationPath error:NULL];
+    BOOL success = [fileManager copyItemAtURL:location toURL:destinationPath error:&error];
+    
+    if (success) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIImage *image = [UIImage imageWithContentsOfFile:[destinationPath path]];
+            self.downloadIV.image = image;
+            self.downloadIV.contentMode = UIViewContentModeScaleAspectFill;
+            self.downloadIV.hidden = NO;
+        });
+    } else {
+        NSLog(@"Couldn't copy the downloaded file");
+    }
 }
 
 -(void)URLSession:(NSURLSession *)session
@@ -209,8 +234,9 @@ expectedTotalBytes:(int64_t)expectedTotalBytes {
 
 -(void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session {
     NSLog(@"Background URL session %@ finished events.\n", session);
-    if (session.configuration.identifier)
+    if (session.configuration.identifier) {
         [self callCompletionHandlerForSession: session.configuration.identifier];
+    }
 }
 
 @end
