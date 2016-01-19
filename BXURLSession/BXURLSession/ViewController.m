@@ -239,4 +239,20 @@ expectedTotalBytes:(int64_t)expectedTotalBytes {
     }
 }
 
+- (void)URLSession:(NSURLSession *)session
+              task:(NSURLSessionTask *)task
+willPerformHTTPRedirection:(NSHTTPURLResponse *)redirectResponse
+        newRequest:(NSURLRequest *)request
+ completionHandler:(void (^)(NSURLRequest *))completionHandler {
+    // 处理重定位
+    NSMutableURLRequest *newRequest = nil;
+    if (request){
+        newRequest = [request mutableCopy];
+        [task.originalRequest.allHTTPHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop){
+            [newRequest setValue:value forHTTPHeaderField:key];
+        }];
+    }
+    completionHandler(newRequest);
+}
+
 @end
