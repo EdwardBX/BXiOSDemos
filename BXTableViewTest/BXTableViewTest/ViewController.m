@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "DetailViewController.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -32,7 +33,7 @@
  numberOfRowsInSection:(NSInteger)section{
     return 5;
 }
-#pragma mark - ----tableViewDelegate
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *MyIdentifier = @"MyReuseIdentifier";
@@ -40,8 +41,21 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
     }
-    cell.textLabel.text = _dataArray[indexPath.row];
+    cell.textLabel.text = self.dataArray[indexPath.row];
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
     return cell;
 }
 
+#pragma mark - ----tableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"showDetails" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"showDetails"]) {
+        DetailViewController *detailViewController = [segue destinationViewController];
+        NSIndexPath *indexPath = [self.myTableView indexPathForSelectedRow];
+        detailViewController.nameData = self.dataArray[indexPath.row];
+    }
+}
 @end

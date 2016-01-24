@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bPh-kM-Z40">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -29,21 +28,72 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hlm-AR-HAL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="65g-ka-itT"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hlm-AR-HAL" secondAttribute="bottom" id="Evf-Ak-Azr"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hlm-AR-HAL" secondAttribute="trailing" constant="-20" id="GIq-hY-muj"/>
-                            <constraint firstItem="hlm-AR-HAL" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="a5B-p1-1T2"/>
-                            <constraint firstItem="hlm-AR-HAL" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cZ6-yq-TZu"/>
-                            <constraint firstItem="hlm-AR-HAL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fKg-Qo-2Xo"/>
+                            <constraint firstItem="hlm-AR-HAL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K9I-U2-Mym"/>
+                            <constraint firstItem="hlm-AR-HAL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Nct-J4-eXu"/>
+                            <constraint firstItem="hlm-AR-HAL" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Z16-8o-2bg"/>
+                            <constraint firstItem="hlm-AR-HAL" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="i8P-wj-2HW"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="aFS-4G-IQE"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="736"/>
                     <connections>
                         <outlet property="myTableView" destination="hlm-AR-HAL" id="oPF-ur-RPi"/>
+                        <segue destination="znV-J4-OAI" kind="show" identifier="showDetails" id="Ofj-T5-qmA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1010" y="339"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="7hw-aj-Cmg">
+            <objects>
+                <viewController id="znV-J4-OAI" customClass="DetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fO4-0P-ssR"/>
+                        <viewControllerLayoutGuide type="bottom" id="S0j-Hc-mOU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qrL-eX-2i2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2K7-vm-31t">
+                                <rect key="frame" x="207" y="368.5" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2K7-vm-31t" firstAttribute="centerX" secondItem="qrL-eX-2i2" secondAttribute="centerX" id="6gh-oR-zrB"/>
+                            <constraint firstItem="2K7-vm-31t" firstAttribute="centerY" secondItem="qrL-eX-2i2" secondAttribute="centerY" id="Nfm-qz-Dsn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="2K7-vm-31t" id="RGl-rd-fFI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gCU-Ym-KQp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1770" y="339"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="y2P-3E-pYA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bPh-kM-Z40" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="e5M-6s-0mr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Y4D-O9-oXb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DXD-GV-3VN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="198" y="339"/>
         </scene>
