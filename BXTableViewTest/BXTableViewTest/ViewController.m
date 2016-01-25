@@ -19,8 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSArray *bxArray = @[@"xbx", @"xbx"];
-    NSArray *ccArray = @[@"cc", @"cc"];
+    NSMutableArray *bxArray = [[NSMutableArray alloc]initWithArray:@[@"xbx", @"xbx", @"xbx", @"xbx", @"xbx", @"xbx", @"xbx", @"xbx", @"xbx", @"xbx"]];
+    NSMutableArray *ccArray = [[NSMutableArray alloc]initWithArray:@[@"cc", @"cc", @"cc", @"cc", @"cc", @"cc", @"cc", @"cc", @"cc"]];
     _dataArray = @[bxArray, ccArray];
     // Do any additional setup after loading the view, typically from a nib.
     // 个性化 table title
@@ -30,6 +30,9 @@
     tableTitle.font = [UIFont boldSystemFontOfSize:18];
     tableTitle.text = @"LOVE";
     self.myTableView.tableHeaderView = tableTitle;
+    
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +47,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section{
-    NSArray *aArray = self.dataArray[section];
+    NSMutableArray *aArray = self.dataArray[section];
     return [aArray count];
 }
 
@@ -70,7 +73,7 @@ titleForHeaderInSection:(NSInteger)section{
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
     }
-    NSArray *nameArray = self.dataArray[indexPath.section];
+    NSMutableArray *nameArray = self.dataArray[indexPath.section];
     cell.textLabel.text = nameArray[indexPath.row];
     if (indexPath.row == self.selectedRow && indexPath.section == self.selectedSection) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -83,6 +86,7 @@ titleForHeaderInSection:(NSInteger)section{
 
 #pragma mark - ----tableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     self.selectedRow = indexPath.row;
     self.selectedSection = indexPath.section;
     [self.myTableView reloadData];
@@ -96,6 +100,24 @@ titleForHeaderInSection:(NSInteger)section{
     return 2;
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == ((NSArray*)self.dataArray[indexPath.section]).count - 1) {
+        return UITableViewCellEditingStyleInsert;
+    } else {
+        return UITableViewCellEditingStyleDelete;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // 操作 datasource 的更改
+        [((NSMutableArray*)self.dataArray[indexPath.section]) removeObjectAtIndex:indexPath.row];
+        // 删除选择的单元格
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+#pragma mark - ----showDetails segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetails"]) {
         DetailViewController *detailViewController = [segue destinationViewController];
@@ -104,4 +126,11 @@ titleForHeaderInSection:(NSInteger)section{
         detailViewController.nameData = nameArray[indexPath.row];
     }
 }
+
+#pragma mark - ----edit mode action
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    [self.myTableView setEditing:editing animated:YES];
+}
+
 @end
