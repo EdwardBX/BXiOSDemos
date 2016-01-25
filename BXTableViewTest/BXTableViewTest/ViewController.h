@@ -11,6 +11,8 @@
 @interface ViewController : UIViewController
 
 @property (nonatomic, copy) NSArray *dataArray;
+@property (nonatomic, assign) NSInteger selectedRow;
+@property (nonatomic, assign) NSInteger selectedSection;
 
 @end
 

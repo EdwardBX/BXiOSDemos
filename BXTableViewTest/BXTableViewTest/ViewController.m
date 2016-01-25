@@ -19,8 +19,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _dataArray = @[@"xbx",@"cc",@"cc",@"cc",@"cc",@"cc",@"cc"];
+    NSArray *bxArray = @[@"xbx", @"xbx"];
+    NSArray *ccArray = @[@"cc", @"cc"];
+    _dataArray = @[bxArray, ccArray];
     // Do any additional setup after loading the view, typically from a nib.
+    // 个性化 table title
+    UILabel *tableTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
+    tableTitle.textColor = [UIColor blueColor];
+    tableTitle.backgroundColor = self.myTableView.backgroundColor;
+    tableTitle.font = [UIFont boldSystemFontOfSize:18];
+    tableTitle.text = @"LOVE";
+    self.myTableView.tableHeaderView = tableTitle;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,9 +38,29 @@
 }
 
 #pragma mark - ----tableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return [self.dataArray count];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    NSArray *aArray = self.dataArray[section];
+    return [aArray count];
+}
+
+- (NSArray <NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView{
+    return @[@"x",@"c"];
+}
+
+- (NSString *)tableView:(UITableView *)tableView
+titleForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return @"x";
+    }
+    if (section == 1) {
+        return @"c";
+    }
+    return @"";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -41,21 +70,38 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
     }
-    cell.textLabel.text = self.dataArray[indexPath.row];
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    NSArray *nameArray = self.dataArray[indexPath.section];
+    cell.textLabel.text = nameArray[indexPath.row];
+    if (indexPath.row == self.selectedRow && indexPath.section == self.selectedSection) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
     return cell;
 }
 
 #pragma mark - ----tableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"showDetails" sender:self];
+    self.selectedRow = indexPath.row;
+    self.selectedSection = indexPath.section;
+    [self.myTableView reloadData];
+}
+
+// cell 内的缩进
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return 0;
+    }
+    return 2;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetails"]) {
         DetailViewController *detailViewController = [segue destinationViewController];
         NSIndexPath *indexPath = [self.myTableView indexPathForSelectedRow];
-        detailViewController.nameData = self.dataArray[indexPath.row];
+        NSArray *nameArray = self.dataArray[indexPath.section];
+        detailViewController.nameData = nameArray[indexPath.row];
     }
 }
 @end
