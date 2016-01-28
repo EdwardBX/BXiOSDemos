@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9531"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BXXibViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hme-RS-3ec">
+                    <rect key="frame" x="20" y="64" width="275" height="516"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPV-DO-M20">
+                    <rect key="frame" x="305" y="64" width="275" height="516"/>
+                    <color key="backgroundColor" red="0.0" green="0.1843137255" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="cPV-DO-M20" secondAttribute="bottom" constant="20" id="5gE-Da-nWA"/>
+                <constraint firstItem="cPV-DO-M20" firstAttribute="leading" secondItem="hme-RS-3ec" secondAttribute="trailing" constant="10" id="6Fl-f1-4yA"/>
+                <constraint firstItem="cPV-DO-M20" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="E5p-0f-MrH"/>
+                <constraint firstItem="hme-RS-3ec" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="HbW-I0-kDK"/>
+                <constraint firstItem="hme-RS-3ec" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Pkb-6M-b3s"/>
+                <constraint firstAttribute="bottom" secondItem="hme-RS-3ec" secondAttribute="bottom" constant="20" id="XPb-2z-qVe"/>
+                <constraint firstAttribute="trailing" secondItem="cPV-DO-M20" secondAttribute="trailing" constant="20" id="muZ-HT-Kuh"/>
+                <constraint firstItem="hme-RS-3ec" firstAttribute="width" secondItem="cPV-DO-M20" secondAttribute="width" id="n0F-pc-p9g"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
