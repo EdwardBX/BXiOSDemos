@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "BXXibViewController.h"
 #import "BXStackViewController.h"
+#import "BXCodeViewController.h"
+#import "BXSizeClassesViewController.h"
 
 #define UITableViewCellIdentifier   @"UITableViewCellIdentifier"
 
@@ -16,7 +18,7 @@ typedef NS_ENUM(NSInteger, BXViewControllerType) {
     BXViewControllerTypeNib,
     BXViewControllerTypeStackView,
     BXViewControllerTypeCode,
-//    BXViewControllerTypeNibCode,
+    BXViewControllerTypeSizeClasses,
 } ;
 
 typedef void (^CellClickActions)(void);
@@ -44,14 +46,17 @@ typedef void (^CellClickActions)(void);
 
 -(void)initBaseData {
     self.dataList = @[
-                      @{@(BXViewControllerTypeNib):@"纯nib文件使用autolayout"},
+                      @{@(BXViewControllerTypeNib):@"Xib 文件使用 Autolayout"},
                       @{@(BXViewControllerTypeStackView):@"StackView 例子"},
-                      @{@(BXViewControllerTypeCode):@"纯代码使用autolayout"},
+                      @{@(BXViewControllerTypeCode):@"纯代码使用 Autolayout"},
+                      @{@(BXViewControllerTypeSizeClasses):@"Size Classes 例子"},
                       ];
     
     self.actionList = @[
                         @{@(BXViewControllerTypeNib):^{[self.navigationController pushViewController:[[BXXibViewController alloc] init] animated:YES];}},
                         @{@(BXViewControllerTypeStackView):^{[self.navigationController pushViewController:[[BXStackViewController alloc] init] animated:YES];}},
+                        @{@(BXViewControllerTypeCode):^{[self.navigationController pushViewController:[[BXCodeViewController alloc] init] animated:YES];}},
+                        @{@(BXViewControllerTypeSizeClasses):^{[self.navigationController pushViewController:[[BXSizeClassesViewController alloc] init] animated:YES];}},
                         ];
     
 }

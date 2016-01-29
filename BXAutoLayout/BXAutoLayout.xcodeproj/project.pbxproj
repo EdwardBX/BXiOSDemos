@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		820C6BB51C5B151B00DD9DDB /* BXCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 820C6BB41C5B151B00DD9DDB /* BXCodeViewController.m */; };
+		820C6BB91C5B42EE00DD9DDB /* BXSizeClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 820C6BB71C5B42EE00DD9DDB /* BXSizeClassesViewController.m */; };
+		820C6BBA1C5B42EE00DD9DDB /* BXSizeClassesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 820C6BB81C5B42EE00DD9DDB /* BXSizeClassesViewController.xib */; };
 		827316721C5893670075B9D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 827316711C5893670075B9D7 /* main.m */; };
 		827316751C5893670075B9D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 827316741C5893670075B9D7 /* AppDelegate.m */; };
 		827316781C5893670075B9D7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 827316771C5893670075B9D7 /* ViewController.m */; };
@@ -40,6 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		820C6BB31C5B151B00DD9DDB /* BXCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCodeViewController.h; sourceTree = "<group>"; };
+		820C6BB41C5B151B00DD9DDB /* BXCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCodeViewController.m; sourceTree = "<group>"; };
+		820C6BB61C5B42EE00DD9DDB /* BXSizeClassesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXSizeClassesViewController.h; sourceTree = "<group>"; };
+		820C6BB71C5B42EE00DD9DDB /* BXSizeClassesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXSizeClassesViewController.m; sourceTree = "<group>"; };
+		820C6BB81C5B42EE00DD9DDB /* BXSizeClassesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BXSizeClassesViewController.xib; sourceTree = "<group>"; };
 		8273166D1C5893670075B9D7 /* BXAutoLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BXAutoLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		827316711C5893670075B9D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		827316731C5893670075B9D7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -117,6 +125,11 @@
 				827316741C5893670075B9D7 /* AppDelegate.m */,
 				827316761C5893670075B9D7 /* ViewController.h */,
 				827316771C5893670075B9D7 /* ViewController.m */,
+				820C6BB61C5B42EE00DD9DDB /* BXSizeClassesViewController.h */,
+				820C6BB71C5B42EE00DD9DDB /* BXSizeClassesViewController.m */,
+				820C6BB81C5B42EE00DD9DDB /* BXSizeClassesViewController.xib */,
+				820C6BB31C5B151B00DD9DDB /* BXCodeViewController.h */,
+				820C6BB41C5B151B00DD9DDB /* BXCodeViewController.m */,
 				827316A81C58C2C30075B9D7 /* BXStackViewController.h */,
 				827316A91C58C2C30075B9D7 /* BXStackViewController.m */,
 				827316AA1C58C2C30075B9D7 /* BXStackViewController.xib */,
@@ -266,6 +279,7 @@
 				827316801C5893670075B9D7 /* LaunchScreen.storyboard in Resources */,
 				827316AC1C58C2C30075B9D7 /* BXStackViewController.xib in Resources */,
 				827316AE1C58CEAF0075B9D7 /* 180.png in Resources */,
+				820C6BBA1C5B42EE00DD9DDB /* BXSizeClassesViewController.xib in Resources */,
 				8273167D1C5893670075B9D7 /* Assets.xcassets in Resources */,
 				8273167B1C5893670075B9D7 /* Main.storyboard in Resources */,
 			);
@@ -297,6 +311,8 @@
 				827316781C5893670075B9D7 /* ViewController.m in Sources */,
 				827316751C5893670075B9D7 /* AppDelegate.m in Sources */,
 				827316721C5893670075B9D7 /* main.m in Sources */,
+				820C6BB91C5B42EE00DD9DDB /* BXSizeClassesViewController.m in Sources */,
+				820C6BB51C5B151B00DD9DDB /* BXCodeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +536,7 @@
 				8273169C1C5893670075B9D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8273169D1C5893670075B9D7 /* Build configuration list for PBXNativeTarget "BXAutoLayoutTests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +545,7 @@
 				8273169F1C5893670075B9D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		827316A01C5893670075B9D7 /* Build configuration list for PBXNativeTarget "BXAutoLayoutUITests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +554,7 @@
 				827316A21C5893670075B9D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

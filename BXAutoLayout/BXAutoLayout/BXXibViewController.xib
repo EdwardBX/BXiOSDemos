@@ -2,7 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BXXibViewController">
@@ -15,21 +16,84 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hme-RS-3ec">
-                    <rect key="frame" x="20" y="64" width="275" height="516"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPV-DO-M20">
-                    <rect key="frame" x="305" y="64" width="275" height="516"/>
+                    <rect key="frame" x="305" y="72" width="275" height="508"/>
                     <color key="backgroundColor" red="0.0" green="0.1843137255" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hme-RS-3ec">
+                    <rect key="frame" x="20" y="72" width="275" height="508"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Middle Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amz-jq-dRX">
+                            <rect key="frame" x="8" y="62" width="96" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BuH-N5-QHF">
+                            <rect key="frame" x="8" y="100" width="96" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter first name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nfy-2O-Px7">
+                            <rect key="frame" x="112" y="20" width="155" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter middle name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZeF-N3-kGM">
+                            <rect key="frame" x="112" y="58" width="155" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jhf-NP-mI8">
+                            <rect key="frame" x="112" y="96" width="155" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFl-w6-5tG">
+                            <rect key="frame" x="8" y="25" width="96" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <constraints>
+                        <constraint firstItem="fFl-w6-5tG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hme-RS-3ec" secondAttribute="top" constant="20" id="02e-aZ-0Ko"/>
+                        <constraint firstItem="BuH-N5-QHF" firstAttribute="top" secondItem="amz-jq-dRX" secondAttribute="bottom" priority="249" constant="8" symbolic="YES" id="2n6-lE-UGn"/>
+                        <constraint firstItem="Jhf-NP-mI8" firstAttribute="top" secondItem="ZeF-N3-kGM" secondAttribute="bottom" priority="249" constant="8" symbolic="YES" id="4Yy-ZG-b2b"/>
+                        <constraint firstItem="Jhf-NP-mI8" firstAttribute="leading" secondItem="BuH-N5-QHF" secondAttribute="trailing" constant="8" symbolic="YES" id="4v9-K5-2Aa"/>
+                        <constraint firstItem="nfy-2O-Px7" firstAttribute="baseline" secondItem="fFl-w6-5tG" secondAttribute="baseline" id="5AU-75-YWy"/>
+                        <constraint firstItem="ZeF-N3-kGM" firstAttribute="width" secondItem="nfy-2O-Px7" secondAttribute="width" id="6MC-qB-2nV"/>
+                        <constraint firstItem="ZeF-N3-kGM" firstAttribute="leading" secondItem="amz-jq-dRX" secondAttribute="trailing" constant="8" symbolic="YES" id="B0D-HY-vLA"/>
+                        <constraint firstItem="nfy-2O-Px7" firstAttribute="top" secondItem="hme-RS-3ec" secondAttribute="top" priority="249" constant="20" id="B6O-9N-R0O"/>
+                        <constraint firstItem="BuH-N5-QHF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="amz-jq-dRX" secondAttribute="bottom" constant="8" symbolic="YES" id="J3X-Eh-ISp"/>
+                        <constraint firstItem="ZeF-N3-kGM" firstAttribute="baseline" secondItem="amz-jq-dRX" secondAttribute="baseline" id="Kch-bq-iiF"/>
+                        <constraint firstItem="amz-jq-dRX" firstAttribute="top" secondItem="fFl-w6-5tG" secondAttribute="bottom" priority="249" constant="8" symbolic="YES" id="Mys-Kv-jnh"/>
+                        <constraint firstItem="fFl-w6-5tG" firstAttribute="leading" secondItem="hme-RS-3ec" secondAttribute="leadingMargin" id="OEb-pj-h7E"/>
+                        <constraint firstItem="ZeF-N3-kGM" firstAttribute="top" secondItem="nfy-2O-Px7" secondAttribute="bottom" constant="8" symbolic="YES" id="OVl-bg-ND4"/>
+                        <constraint firstItem="nfy-2O-Px7" firstAttribute="leading" secondItem="fFl-w6-5tG" secondAttribute="trailing" constant="8" symbolic="YES" id="TOf-Fi-mGa"/>
+                        <constraint firstItem="BuH-N5-QHF" firstAttribute="leading" secondItem="hme-RS-3ec" secondAttribute="leadingMargin" id="WG4-5Y-S9u"/>
+                        <constraint firstItem="Jhf-NP-mI8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZeF-N3-kGM" secondAttribute="bottom" constant="8" symbolic="YES" id="aY0-Nd-bw8"/>
+                        <constraint firstItem="nfy-2O-Px7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hme-RS-3ec" secondAttribute="top" constant="20" id="cMH-re-hOm"/>
+                        <constraint firstItem="fFl-w6-5tG" firstAttribute="top" secondItem="hme-RS-3ec" secondAttribute="top" priority="249" constant="20" id="fUO-7B-xoq"/>
+                        <constraint firstItem="amz-jq-dRX" firstAttribute="leading" secondItem="hme-RS-3ec" secondAttribute="leadingMargin" id="gwM-pE-63A"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="nfy-2O-Px7" secondAttribute="trailing" id="h4u-qb-Lwv"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="Jhf-NP-mI8" secondAttribute="trailing" id="jFC-aP-Iqf"/>
+                        <constraint firstItem="Jhf-NP-mI8" firstAttribute="width" secondItem="nfy-2O-Px7" secondAttribute="width" id="jOx-Dt-0vn"/>
+                        <constraint firstItem="Jhf-NP-mI8" firstAttribute="baseline" secondItem="BuH-N5-QHF" secondAttribute="baseline" id="jmu-KC-JcS"/>
+                        <constraint firstItem="amz-jq-dRX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fFl-w6-5tG" secondAttribute="bottom" constant="8" symbolic="YES" id="sgT-ie-xVZ"/>
+                        <constraint firstAttribute="trailingMargin" secondItem="ZeF-N3-kGM" secondAttribute="trailing" id="xsu-eg-NLk"/>
+                        <constraint firstItem="ZeF-N3-kGM" firstAttribute="top" secondItem="nfy-2O-Px7" secondAttribute="bottom" priority="249" constant="8" symbolic="YES" id="zXY-G3-9M1"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="cPV-DO-M20" secondAttribute="bottom" constant="20" id="5gE-Da-nWA"/>
                 <constraint firstItem="cPV-DO-M20" firstAttribute="leading" secondItem="hme-RS-3ec" secondAttribute="trailing" constant="10" id="6Fl-f1-4yA"/>
-                <constraint firstItem="cPV-DO-M20" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="E5p-0f-MrH"/>
-                <constraint firstItem="hme-RS-3ec" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="HbW-I0-kDK"/>
+                <constraint firstItem="cPV-DO-M20" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" constant="64" id="E5p-0f-MrH"/>
+                <constraint firstItem="hme-RS-3ec" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" constant="64" id="HbW-I0-kDK"/>
                 <constraint firstItem="hme-RS-3ec" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Pkb-6M-b3s"/>
                 <constraint firstAttribute="bottom" secondItem="hme-RS-3ec" secondAttribute="bottom" constant="20" id="XPb-2z-qVe"/>
                 <constraint firstAttribute="trailing" secondItem="cPV-DO-M20" secondAttribute="trailing" constant="20" id="muZ-HT-Kuh"/>

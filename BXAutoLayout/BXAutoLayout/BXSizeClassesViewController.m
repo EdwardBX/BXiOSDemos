@@ -1,23 +1,22 @@
 //
-//  BXXibViewController.m
+//  BXSizeClassesViewController.m
 //  BXAutoLayout
 //
-//  Created by bx_1512 on 16/1/27.
+//  Created by bx_1512 on 16/1/29.
 //  Copyright © 2016年 bx_1512. All rights reserved.
 //
 
-#import "BXXibViewController.h"
+#import "BXSizeClassesViewController.h"
 
-@interface BXXibViewController ()
+@interface BXSizeClassesViewController ()
 
 @end
 
-@implementation BXXibViewController
+@implementation BXSizeClassesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Xib 文件使用 Autolayout";
 }
 
 - (void)didReceiveMemoryWarning {
