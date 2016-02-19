@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "DetailViewController.h"
+#import "CustomCell.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -29,6 +30,7 @@
     tableTitle.backgroundColor = self.myTableView.backgroundColor;
     tableTitle.font = [UIFont boldSystemFontOfSize:18];
     tableTitle.text = @"LOVE";
+    // 设置 tableview 的 headerView
     self.myTableView.tableHeaderView = tableTitle;
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -68,20 +70,30 @@ titleForHeaderInSection:(NSInteger)section{
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *MyIdentifier = @"MyReuseIdentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
-    }
     NSMutableArray *nameArray = self.dataArray[indexPath.section];
-    cell.textLabel.text = nameArray[indexPath.row];
-    if (indexPath.row == self.selectedRow && indexPath.section == self.selectedSection) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
     
-    return cell;
+    if (indexPath.section == 0) {
+        static NSString *MyIdentifier = @"MyReuseIdentifier";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault  reuseIdentifier:MyIdentifier];
+        }
+        cell.textLabel.text = nameArray[indexPath.row];
+        if (indexPath.row == self.selectedRow && indexPath.section == self.selectedSection) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        return cell;
+    } else {
+        static NSString *CellIdentifier = @"MyCustomCellReuseIdentifier";
+        CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        cell.customLabel.text = nameArray[indexPath.row];
+        return cell;
+    }
 }
 
 #pragma mark - ----tableViewDelegate
@@ -114,6 +126,16 @@ titleForHeaderInSection:(NSInteger)section{
         [((NSMutableArray*)self.dataArray[indexPath.section]) removeObjectAtIndex:indexPath.row];
         // 删除选择的单元格
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadData];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row % 2 == 0) {
+        UIColor *altCellColor = [UIColor colorWithWhite:0.7 alpha:1];
+        cell.backgroundColor = altCellColor;
+    } else {
+        cell.backgroundColor = [UIColor whiteColor];
     }
 }
 

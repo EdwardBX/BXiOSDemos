@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8218A7F11C76E9DF00216EBD /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8218A7F01C76E9DF00216EBD /* CustomCell.m */; };
 		8247E1F91C55090B006CB5A0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8247E1F81C55090B006CB5A0 /* DetailViewController.m */; };
 		82D2239F1C5123AF000F709A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D2239E1C5123AF000F709A /* main.m */; };
 		82D223A21C5123AF000F709A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D223A11C5123AF000F709A /* AppDelegate.m */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8218A7EF1C76E9DF00216EBD /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		8218A7F01C76E9DF00216EBD /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
 		8247E1F71C55090B006CB5A0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		8247E1F81C55090B006CB5A0 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		82D2239A1C5123AF000F709A /* BXTableViewTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BXTableViewTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +113,8 @@
 				82D223A41C5123AF000F709A /* ViewController.m */,
 				8247E1F71C55090B006CB5A0 /* DetailViewController.h */,
 				8247E1F81C55090B006CB5A0 /* DetailViewController.m */,
+				8218A7EF1C76E9DF00216EBD /* CustomCell.h */,
+				8218A7F01C76E9DF00216EBD /* CustomCell.m */,
 				82D223A61C5123AF000F709A /* Main.storyboard */,
 				82D223A91C5123AF000F709A /* Assets.xcassets */,
 				82D223AB1C5123AF000F709A /* LaunchScreen.storyboard */,
@@ -279,6 +284,7 @@
 				82D223A21C5123AF000F709A /* AppDelegate.m in Sources */,
 				82D2239F1C5123AF000F709A /* main.m in Sources */,
 				8247E1F91C55090B006CB5A0 /* DetailViewController.m in Sources */,
+				8218A7F11C76E9DF00216EBD /* CustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
