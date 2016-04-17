@@ -47,12 +47,17 @@
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(nonnull void (^)(NSArray * _Nullable))restorationHandler {
     if ([userActivity.activityType isEqualToString:CSSearchableItemActionType]) {
         NSString *uniqueIdentifier = [userActivity.userInfo objectForKey:CSSearchableItemActivityIdentifier];
+        
         UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
         ViewController *controller = (ViewController *)navController.viewControllers[0];
         [controller restoreUserActivityStateWithPersonIndex:uniqueIdentifier.integerValue];
         return YES;
     }
     return NO;
+}
+
+- (BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(nonnull NSString *)userActivityType {
+    return YES;
 }
 
 @end

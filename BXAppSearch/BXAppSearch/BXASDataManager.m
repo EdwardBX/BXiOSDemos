@@ -48,13 +48,14 @@ NSString *const BXASDataManagerValue = @"description";
         CSSearchableItemAttributeSet* attributeSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"person"];
         [attributeSet setTitle:[item objectForKey:BXASDataManagerKey]];
         [attributeSet setContentDescription:[item objectForKey:BXASDataManagerValue]];
+        // 拨打电话
         [attributeSet setPhoneNumbers:@[@"18771023314"]];
         [attributeSet setSupportsPhoneCall:@1];
         
         CSCustomAttributeKey *key = [[CSCustomAttributeKey alloc] initWithKeyName:@"xbx.BXAppSearch.key" searchable:YES searchableByDefault:YES unique:YES multiValued:NO];
         [attributeSet setValue:[item objectForKey:BXASDataManagerKey] forCustomKey:key];
-        
         NSString *uniqueIdentifier = [NSString stringWithFormat:@"%li", (long)id++];
+        
         // 创建一个可搜索条目，提供它的 unique identifier, domain identifier, and the attribute set
         CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:uniqueIdentifier domainIdentifier:@"xbx.BXAppSearch" attributeSet:attributeSet];
         

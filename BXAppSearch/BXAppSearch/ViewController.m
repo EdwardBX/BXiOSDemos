@@ -21,27 +21,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [self initActivity];
-}
-
-- (void)initActivity{
-   
 }
 
 - (void)restoreUserActivityStateWithPersonIndex:(NSUInteger)index {
     NSArray *people = [BXASDataManager sharedInstance].people;
+    
     if (index >= people.count) {
         return;
     }
     
     NSDictionary *person = people[index];
-    
     DetailViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailViewController"];
     controller.personDetails = person;
-    [self.navigationController setViewControllers:@[self, controller] animated:YES];
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    [self.myTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)prepareForSegue:(nonnull UIStoryboardSegue *)segue sender:(nullable id)sender {
