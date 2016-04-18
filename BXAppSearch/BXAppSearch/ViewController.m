@@ -17,6 +17,9 @@
 @end
 
 @implementation ViewController
+- (void)viewWillAppear:(BOOL)animated {
+    [self initActivity];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,6 +40,20 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+- (void)initActivity{
+    NSUserActivity *activity = [[NSUserActivity alloc] initWithActivityType:@"xbx.BXAppSearch.appcontent"];
+    activity.eligibleForSearch = YES;
+    activity.needsSave = YES;
+    self.userActivity = activity;
+    [self.userActivity becomeCurrent];
+}
+
+- (void)updateUserActivityState:(NSUserActivity *)activity {
+    activity.title = @"第一个搜索条目";
+    activity.userInfo = @{@"id": @"123"};
+    [super updateUserActivityState:activity];
+}
+
 - (void)prepareForSegue:(nonnull UIStoryboardSegue *)segue sender:(nullable id)sender {
     NSString *identifier = segue.identifier;
     NSIndexPath *indexPath = [self.myTableView indexPathForSelectedRow];
@@ -52,7 +69,6 @@
 #pragma mark - ----UITableView delegate
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [BXASDataManager sharedInstance].people.count;
-    
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

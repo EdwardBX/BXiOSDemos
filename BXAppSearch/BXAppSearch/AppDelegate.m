@@ -53,6 +53,11 @@
         [controller restoreUserActivityStateWithPersonIndex:uniqueIdentifier.integerValue];
         return YES;
     }
+    
+    if ([userActivity.activityType isEqualToString:@"xbx.BXAppSearch.appcontent"]) {
+        NSLog(@"success first search");
+    }
+    
     return NO;
 }
 
